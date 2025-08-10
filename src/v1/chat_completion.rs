@@ -251,6 +251,28 @@ pub struct ChatCompletionMessage {
     pub tool_call_id: Option<String>,
 }
 
+impl ChatCompletionMessage {
+	pub fn new(role: MessageRole, content: Content) -> Self {
+		ChatCompletionMessage{
+			role,
+			content,
+			name: None,
+			tool_calls: None,
+			tool_call_id: None
+		}
+	}
+
+	pub fn new_text(role: MessageRole, content: String) -> Self {
+		ChatCompletionMessage{
+			role,
+			content: Content::Text(content),
+			name: None,
+			tool_call_id: None,
+			tool_calls: None
+		}
+	}
+}
+
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct ChatCompletionMessageForResponse {
     pub role: MessageRole,

@@ -10,6 +10,6 @@ pub struct ModelsResponse {
 pub struct ModelResponse {
     pub id: String,
     pub object: String,
-    pub created: i64,
+    pub created: Option<i64>,
     pub owned_by: String,
 }
