@@ -27,7 +27,8 @@ pub enum JSONSchemaType {
     String,
     Array,
     Null,
-    Boolean,
+	Boolean,
+	Integer,
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone, Default, PartialEq, Eq)]
