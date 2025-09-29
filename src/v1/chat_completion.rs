@@ -77,6 +77,10 @@ pub struct ChatCompletionRequest {
     pub tool_choice: Option<ToolChoiceType>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub reasoning: Option<Reasoning>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub grammar_lazy: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub grammar_triggers: Option<Vec<String>>
 }
 
 impl ChatCompletionRequest {
@@ -100,6 +104,8 @@ impl ChatCompletionRequest {
             parallel_tool_calls: None,
             tool_choice: None,
             reasoning: None,
+			grammar_lazy: None,
+			grammar_triggers: None,
         }
     }
 }
@@ -121,7 +127,9 @@ impl_builder_methods!(
     tools: Vec<Tool>,
     parallel_tool_calls: bool,
     tool_choice: ToolChoiceType,
-    reasoning: Reasoning
+    reasoning: Reasoning,
+	grammar_lazy: bool,
+	grammar_triggers: Vec<String>
 );
 
 #[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
