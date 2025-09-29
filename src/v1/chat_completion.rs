@@ -15,6 +15,12 @@ pub enum ToolChoiceType {
     ToolChoice { tool: Tool },
 }
 
+#[derive(Debug, Serialize, Deserialize, Clone)]
+pub struct LazyGrammarTrigger {
+	pub word: String,
+	pub at_start: bool
+}
+
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 #[serde(rename_all = "lowercase")]
 pub enum ReasoningEffort {
@@ -80,7 +86,7 @@ pub struct ChatCompletionRequest {
 	#[serde(skip_serializing_if = "Option::is_none")]
 	pub grammar_lazy: Option<bool>,
 	#[serde(skip_serializing_if = "Option::is_none")]
-	pub grammar_triggers: Option<Vec<String>>
+	pub grammar_triggers: Option<Vec<LazyGrammarTrigger>>
 }
 
 impl ChatCompletionRequest {
@@ -129,7 +135,7 @@ impl_builder_methods!(
     tool_choice: ToolChoiceType,
     reasoning: Reasoning,
 	grammar_lazy: bool,
-	grammar_triggers: Vec<String>
+	grammar_triggers: Vec<LazyGrammarTrigger>
 );
 
 #[derive(Debug, Deserialize, Serialize, Clone, PartialEq, Eq)]
